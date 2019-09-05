@@ -5,10 +5,12 @@ const mongoose=require('mongoose');
 const passport=require('passport');
 
 // Load profile model
-const profile=require('../../models/Profile');
+const Profile=require('../../models/Profile');
 
 // load user profile
 const User=require('../../models/Users');
+
+const validaterProfileInput=require('../../validation/profile'); 
 
 // @route  GET api/profile/test
 // @desc   test profile route
@@ -27,6 +29,7 @@ router.get('/test', (req, res) => {
 router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 	const errors={};
 	Profile.findOne({user:req.user.id})
+		.populate('user',['name','avatar'])
 		.then(profile=>{
 			if (!profile) {
 				errors.noprofile='there is no profile for this user';
@@ -41,7 +44,13 @@ router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 // @desc   get current user profile
 // @access privet
 
-router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
+router.post('/',passport.authenticate('jwt',{session:false}),( req , res )=>{
+	const {errors,isValid}=validaterProfileInput(req.body);
+	// check Validation
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
 	// get fields
 	const profileFields={};
 	profileFields.user=req.user.id;
@@ -51,7 +60,7 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 	if (req.body.website) profileFields.website=req.body.website;
 	if (req.body.location) profileFields.location=req.body.location;
 	if (req.body.bio) profileFields.bio=req.body.bio;
-	if (req.body.status) profileFields.handle=req.body.handle;
+	if (req.body.status) profileFields.status=req.body.status;
 	if (req.body.githubusername) profileFields.githubusername=req.body.githubusername;
 	
 	// skills -split into Array
@@ -68,26 +77,31 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 	if (req.body.instagram) profileFields.social.instagram=req.body.instagram;
 	
 
-	profile.findOne({user:req.user.id})
+	Profile.findOne({user:req.user.id})
 		.then(profile=>{
 			if (profile) {
 				// update
-				profile.findOneAndUpdate({user:req.user.id},{$set:profileFields},{new:true})
-					.then(profile=>req.json(profile));
+				Profile.findOneAndUpdate(
+					{user:req.user.id},
+					{$set:profileFields},
+					{new:true})
+						.then(profile=>res.json(profile));
 			}else{
 				// create
 
 				// check if handle exists
-				profile.findOne({handle:profileFields.handle})
+				Profile.findOne({handle:profileFields.handle})
 				.then(profile=>{
-					errors.handle='that handle already exists';
-					res.status(400).json(errors);
-				})
+					if (profile) {
+						errors.handle='that handle already exists';
+						res.status(400).json(errors);
+					}
+				});
 
 				// save profile
 				new Profile(profileFields).save().then(profile=>{
 					res.json(profile)
-				})
+				});
 			}
 		})
 
