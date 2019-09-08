@@ -13,9 +13,9 @@ const validateEducationInput=(data)=>{
 		errors.school='school field is required';
 	}
 
-	if (Validator.isEmpty(data.degrere)) {
+	if (Validator.isEmpty(data.degree)) {
 		
-		errors.degrere='degrere field is required';
+		errors.degree='degree field is required';
 	}
 
 	if (Validator.isEmpty(data.fieldofstudy)) {
