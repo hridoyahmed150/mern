@@ -38,35 +38,19 @@ class Header extends Component {
 	render() {
 		return (
 			<div>
-        <Navbar color="dark" light expand="md">
+        <Navbar color="dark" light expand="md" className="mb-4">
         	<Container>
 	          <NavbarBrand href="/" className='text-white'>DEV</NavbarBrand>
 	          <NavbarToggler onClick={this.toggle} />
 	          <Collapse isOpen={this.state.isOpen} navbar>
 	            <Nav className="ml-auto" navbar>
 	              <NavItem>
-	                <NavLink href="/components/" className='text-white'>Components</NavLink>
+	                <NavLink href="/components/" className='text-white'>Sing Up</NavLink>
 	              </NavItem>
 	              <NavItem>
-	                <NavLink href="https://github.com/reactstrap/reactstrap" className='text-white'>GitHub</NavLink>
+	                <NavLink href="https://github.com/reactstrap/reactstrap" className='text-white'>Login</NavLink>
 	              </NavItem>
-	              <UncontrolledDropdown nav inNavbar>
-	                <DropdownToggle nav caret className='text-white'>
-	                  Options
-	                </DropdownToggle>
-	                <DropdownMenu right>
-	                  <DropdownItem>
-	                    Option 1
-	                  </DropdownItem>
-	                  <DropdownItem>
-	                    Option 2
-	                  </DropdownItem>
-	                  <DropdownItem divider />
-	                  <DropdownItem>
-	                    Reset
-	                  </DropdownItem>
-	                </DropdownMenu>
-	              </UncontrolledDropdown>
+	              
 	            </Nav>
 	          </Collapse>
           </Container>
