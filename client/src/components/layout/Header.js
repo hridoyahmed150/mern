@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
+
 
 
 // reactstrip import
@@ -40,17 +42,17 @@ class Header extends Component {
 			<div>
         <Navbar color="dark" light expand="md" className="mb-4">
         	<Container>
-	          <NavbarBrand href="/" className='text-white'>DEV</NavbarBrand>
+	          <Link to="/" className='text-white navbar-brand'>DEV</Link>
+	          <Link to="/profile" className='text-white navbar-brand'>Developer</Link>
 	          <NavbarToggler onClick={this.toggle} />
 	          <Collapse isOpen={this.state.isOpen} navbar>
 	            <Nav className="ml-auto" navbar>
 	              <NavItem>
-	                <NavLink href="/components/" className='text-white'>Sing Up</NavLink>
+	                <Link to="/register" className='text-white nav-link'>Sing Up</Link>
 	              </NavItem>
 	              <NavItem>
-	                <NavLink href="https://github.com/reactstrap/reactstrap" className='text-white'>Login</NavLink>
-	              </NavItem>
-	              
+	                <Link to="/login" className='text-white nav-link'>Login</Link>
+	              </NavItem> 
 	            </Nav>
 	          </Collapse>
           </Container>
