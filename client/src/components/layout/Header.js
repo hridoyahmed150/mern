@@ -9,17 +9,9 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  Row,
-  Col } from 'reactstrap';
+  Container} from 'reactstrap';
 
 class Header extends Component {
 
