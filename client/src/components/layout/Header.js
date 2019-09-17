@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-
-
+import PropTypes from "prop-types";
+import {connect } from 'react-redux';
+import {logoutUser} from "../../actions/authAction";
 
 // reactstrip import
 
@@ -14,22 +15,51 @@ import {
   Container} from 'reactstrap';
 
 class Header extends Component {
+	state = {	
+      isOpen: false
+    };
 
-	constructor(props) {
-	    super(props);
-
-	    this.toggle = this.toggle.bind(this);
-	    this.state = {
-	      isOpen: false
-	    };
-	  }
-
-	  toggle() {
+	toggle=()=> {
 	      this.setState({
 	        isOpen: !this.state.isOpen
 	      });
 	    }
+	onLogoutClick=(e)=>{
+		e.preventDefault();
+		this.props.logoutUser();
+	}
 	render() {
+
+		const {isAuthenticated , user} =this.props.auth;
+		const authLink=(
+				<Nav className="ml-auto" navbar>
+				  <NavItem>
+				    <a 
+				    	href='' 
+				    	onClick={this.onLogoutClick} 
+				    	className='nav-link'>
+				    	<img 
+				    		src={user.avatar} 
+				    		alt={user.name} 
+				    		title="You must have a gravater connect to your email to display an image " 
+				    		style={{width:'25px' , marginRight:'5px'}}
+				    		className='rounded-circle'/>
+				    	{' '}
+							Logout
+				    </a>
+				  </NavItem>
+				</Nav>
+			)
+		const gestLink=(
+				<Nav className="ml-auto" navbar>
+				  <NavItem>
+				    <Link to="/register" className='text-white nav-link'>Sing Up</Link>
+				  </NavItem>
+				  <NavItem>
+				    <Link to="/login" className='text-white nav-link'>Login</Link>
+				  </NavItem> 
+				</Nav>
+			)
 		return (
 			<div>
         <Navbar color="dark" light expand="md" className="mb-4">
@@ -38,14 +68,7 @@ class Header extends Component {
 	          <Link to="/profile" className='text-white navbar-brand'>Developer</Link>
 	          <NavbarToggler onClick={this.toggle} />
 	          <Collapse isOpen={this.state.isOpen} navbar>
-	            <Nav className="ml-auto" navbar>
-	              <NavItem>
-	                <Link to="/register" className='text-white nav-link'>Sing Up</Link>
-	              </NavItem>
-	              <NavItem>
-	                <Link to="/login" className='text-white nav-link'>Login</Link>
-	              </NavItem> 
-	            </Nav>
+	            {isAuthenticated?authLink:gestLink}
 	          </Collapse>
           </Container>
         </Navbar>
@@ -53,5 +76,11 @@ class Header extends Component {
 		);
 	}
 }
-
-export default Header;
+Header.propTypes={
+	logoutUser:PropTypes.func.isRequired,
+	auth:PropTypes.object.isRequired
+}
+const mapStateToProps=(state)=>({
+	auth:state.auth,
+})
+export default connect(mapStateToProps,{logoutUser})(Header);
