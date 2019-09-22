@@ -6,6 +6,7 @@ import store from './store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import {setCurrentUser,logoutUser} from "./actions/authAction"
+import {clearCurrentProfile} from "./actions/profileAction"
 
 import './App.css';
 import Header from './components/layout/Header';
@@ -13,6 +14,7 @@ import Landing from './components/layout/Landing';
 import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
 
 // check for token 
 if (localStorage.jwtToken) {
@@ -30,6 +32,7 @@ if (localStorage.jwtToken) {
 		//logOut user
 		store.dispatch(logoutUser())
 		// clear current profile
+		store.dispatch(clearCurrentProfile())
 		//redirect to login 
 		window.location.href='/login';
 	}
@@ -45,6 +48,7 @@ function App() {
 		      <div className="container">
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/register" component={Register} />
+						<Route exact path="/dashboard" component={Dashboard} />
 		      </div> 
 		      <Footer />      
 		    </div>

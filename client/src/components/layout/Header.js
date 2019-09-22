@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import PropTypes from "prop-types";
 import {connect } from 'react-redux';
 import {logoutUser} from "../../actions/authAction";
+import { clearCurrentProfile } from "../../actions/profileAction";
 
 // reactstrip import
 
@@ -27,6 +28,7 @@ class Header extends Component {
 	onLogoutClick=(e)=>{
 		e.preventDefault();
 		this.props.logoutUser();
+		this.props.clearCurrentProfile();
 	}
 	render() {
 
@@ -35,7 +37,7 @@ class Header extends Component {
 				<Nav className="ml-auto" navbar>
 				  <NavItem>
 				    <a 
-				    	href='' 
+				    	href='/' 
 				    	onClick={this.onLogoutClick} 
 				    	className='nav-link'>
 				    	<img 
@@ -83,4 +85,4 @@ Header.propTypes={
 const mapStateToProps=(state)=>({
 	auth:state.auth,
 })
-export default connect(mapStateToProps,{logoutUser})(Header);
+export default connect(mapStateToProps,{logoutUser,clearCurrentProfile})(Header);
