@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { getCurrentProfile} from '../../actions/profileAction';
 import Spinner from './../common/Spinner';
-import spinner from '../common/spinner.gif';
 
 
 class Dashboard extends Component {

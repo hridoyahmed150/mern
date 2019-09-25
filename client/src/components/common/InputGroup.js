@@ -1,22 +1,26 @@
 import React from 'react'
 import classname from "classname";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const TextFieldGroup=({
+const InputGroup=({
 	name,
 	placeholder,
 	value,
-	label,
 	error,
-	info,
+	icon,
 	type,
 	onChange,
-	disabled
 })=> {
 	return (
-		<div className="form-group">
+		<div className="input-group mb-3">
+		<div className="input-group-prepend">
+			<span className="input-group-text">
+				<FontAwesomeIcon icon={icon}/>
+				{/*<i className={icon}></i>*/}
+			</span>
+		</div>
 		  <input 
-		  type={type}
 		  onChange={onChange} 
 		  className={classname("form-control form-control-lg",{
 		  	'is-invalid':error
@@ -24,26 +28,23 @@ const TextFieldGroup=({
 		  placeholder={placeholder} 
 		  name={name}
 		  value={value}
-		  disabled={disabled} />
-		  {info && <small className='form-text text-muted'>{info}</small>}
-
+		   />
 		  {error && (<div className='invalid-feedback'>{error}</div>)}
 		</div>
 	)
 }
 
-TextFieldGroup.propTypes = {
+InputGroup.propTypes = {
 	name:PropTypes.string.isRequired,
 	placeholder:PropTypes.string,
 	value:PropTypes.string.isRequired,
-	info:PropTypes.string,
+	icon:PropTypes.string,
 	error:PropTypes.string,
 	type:PropTypes.string.isRequired,
-	onChange:PropTypes.func.isRequired,
-	disable:PropTypes.string,
+	onChange:PropTypes.func.isRequired
 }
 
-TextFieldGroup.defaultProps={
+InputGroup.defaultProps={
 	type:'text'
 }
-export default TextFieldGroup
+export default InputGroup;
