@@ -22,30 +22,52 @@ export const registerUser=(userData,history)=>(dispatch)=>{
 
 // Login user
 
-export const loginUser=userData=>dispatch=>{
-	axios.post('/api/users/login',userData)
-		.then(user=>{
-			// Save to local storage
-			const {token}= user.data;
-			// set token to local storage
-			localStorage.setItem('jwtToken',token)
+// export const loginUser=userData=>dispatch=>{
+// 	axios.post('/api/users/login',userData)
+// 		.then(user=>{
+// 			// Save to local storage
+// 			const {token}= user.data;
+// 			// set token to local storage
+// 			localStorage.setItem('jwtToken',token)
 
-			// set token to header
-			setAuthToken(token);
-			// decode token to get user data 
-			const decoded = jwt_decode(token);
-			// set corrent user 
-			dispatch(setCurrentUser(decoded));
+// 			// set token to header
+// 			setAuthToken(token);
+// 			// decode token to get user data 
+// 			const decoded = jwt_decode(token);
+// 			// set corrent user 
+// 			dispatch(setCurrentUser(decoded));
 
-		}).catch(err=>{
-			dispatch(
-				{
-					type:GET_ERRORS,
-					payload:err.response.data
-				}
-			)
-		})
-}
+// 		}).catch(err=>{
+// 			dispatch(
+// 				{
+// 					type:GET_ERRORS,
+// 					payload:err.response.data
+// 				}
+// 			)
+// 		})
+// }
+export const loginUser = userData => dispatch => {
+  axios
+    .post('/api/users/login', userData)
+    .then(res => {
+      // Save to localStorage
+      const { token } = res.data;
+      // Set token to ls
+      localStorage.setItem('jwtToken', token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
 
 

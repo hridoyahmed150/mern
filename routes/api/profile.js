@@ -277,7 +277,7 @@ router.delete('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 	.then(profile=>{
 			User.findOneAndRemove({_id:req.user.id})
 			.then(()=>{
-				res.josn({success:true})
+				res.json({success:true})
 			})
 	})
 })

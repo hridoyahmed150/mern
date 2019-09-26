@@ -35,6 +35,9 @@ class Header extends Component {
 		const {isAuthenticated , user} =this.props.auth;
 		const authLink=(
 				<Nav className="ml-auto" navbar>
+					<NavItem>
+					  <Link to="/dashboard" className='text-white nav-link'>Dashboard</Link>
+					</NavItem>
 				  <NavItem>
 				    <a 
 				    	href='/' 
