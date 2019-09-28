@@ -70,7 +70,7 @@ class Header extends Component {
         <Navbar color="dark" light expand="md" className="mb-4">
         	<Container>
 	          <Link to="/" className='text-white navbar-brand'>DEV</Link>
-	          <Link to="/profile" className='text-white navbar-brand'>Developer</Link>
+	          <Link to="/profiles" className='text-white navbar-brand'>Developer</Link>
 	          <NavbarToggler onClick={this.toggle} />
 	          <Collapse isOpen={this.state.isOpen} navbar>
 	            {isAuthenticated?authLink:gestLink}
