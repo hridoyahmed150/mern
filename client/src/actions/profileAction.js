@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { GET_PROFILE , GET_PROFILES,PROFILE_LOADING , CLEAR_CURRENT_PROFILE ,GET_ERRORS,SET_CURRENT_USER } from './types';
+import { 
+	GET_PROFILE ,
+	GET_PROFILES,
+	PROFILE_LOADING,
+	CLEAR_CURRENT_PROFILE,
+	GET_ERRORS,
+	SET_CURRENT_USER
+	} from './types';
 
 // get current profile 
 export const getCurrentProfile=()=>dispatch=>{
@@ -142,7 +149,7 @@ export const deleteExperience=(id)=>dispatch=>{
 
 // get add Profiles 
 
-export const getProfiles=(id)=>dispatch=>{
+export const getProfiles=()=>dispatch=>{
 	dispatch(setProfileLoading())
 	axios
 		.get(`/api/profile/all`)
