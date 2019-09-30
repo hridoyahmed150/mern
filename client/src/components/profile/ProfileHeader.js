@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
 import {Link} from 'react-router-dom';
+import { FaGlobe,FaTwitter,FaFacebook,FaLinkedin,FaInstagram,FaYoutube } from "react-icons/fa";
+
+
 export class ProfileHeader extends Component {
 	render() {
 		const {profile}=this.props
@@ -19,21 +22,25 @@ export class ProfileHeader extends Component {
 			        {isEmpty(profile.location)?null:(<p><span>{profile.location}</span></p>)}
 			        <p>
 			        	{isEmpty(profile.website)?null:(
-				          <Link to="chart" target="_blank" to="http://link2external.page.com" >Test</Link>
+				          <Link className="text-white p-2" target="_blank" to={`//${profile.website}`} ><FaGlobe size={32}/></Link>
+			        	)}
+
+			        	{isEmpty(profile.social && profile.social.twitter)?null:(
+										<a className="text-white p-2" target="_blank" href={`//${profile.social.twitter}`} ><FaTwitter color="yellow"  size={32} /></a>
 			        		)}
 			          
-			          <a className="text-white p-2" href="#">
-			            <i className="fab fa-twitter fa-2x"></i>
-			          </a>
-			          <a className="text-white p-2" href="#">
-			            <i className="fab fa-facebook fa-2x"></i>
-			          </a>
-			          <a className="text-white p-2" href="#">
-			            <i className="fab fa-aedin fa-2x"></i>
-			          </a>
-			          <a className="text-white p-2" href="#">
-			            <i className="fab fa-instagram fa-2x"></i>
-			          </a>
+			          {isEmpty(profile.social && profile.social.facebook)?null:(
+										<a className="text-white p-2" target="_blank" href={`//${profile.social.facebook}`} ><FaFacebook color="#3B5998" bakcground="white" size={32} /></a>
+			        		)}
+			          {isEmpty(profile.social && profile.social.linkedin)?null:(
+									<a className="text-white p-2" target="_blank" href={`//${profile.social.linkedin}`} ><FaLinkedin size={32} color="#0077B5" /></a>
+			        	)}
+			          {isEmpty(profile.social && profile.social.instagram)?null:(
+									<a className="text-white p-2" target="_blank" href={`//${profile.social.instagram}`} ><FaInstagram size={32} /></a>
+			        	)}
+			        	{isEmpty(profile.social && profile.social.youtube)?null:(
+									<a className="text-white p-2" target="_blank" href={`//${profile.social.youtube}`} ><FaYoutube size={32} /></a>
+			        	)}
 			        </p>
 			      </div>
 			    </div>
