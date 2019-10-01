@@ -30,7 +30,7 @@ class CreateProfile extends Component {
 		errors:{}
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.setState({errors:nextProps.errors})	
 	}
 

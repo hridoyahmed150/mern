@@ -76,7 +76,7 @@ function App() {
 								<PrivateRoute exact path="/add-education" component={AddEducation} />
 							</Switch>
 							<Route exact path="/not-found" component={NotFound} />
-			      </div>
+			      </div> 
 		      <Footer />      
 		    </div>
 	    </BrowserRouter>

@@ -26,20 +26,20 @@ export class ProfileHeader extends Component {
 			        	)}
 
 			        	{isEmpty(profile.social && profile.social.twitter)?null:(
-										<a className="text-white p-2" target="_blank" href={`//${profile.social.twitter}`} ><FaTwitter color="yellow"  size={32} /></a>
+										<a className="text-white p-2" target="_blank" rel="noopener noreferrer"  href={`//${profile.social.twitter}`} ><FaTwitter color="yellow"  size={32} /></a>
 			        		)}
 			          
 			          {isEmpty(profile.social && profile.social.facebook)?null:(
-										<a className="text-white p-2" target="_blank" href={`//${profile.social.facebook}`} ><FaFacebook color="#3B5998" bakcground="white" size={32} /></a>
+										<a className="text-white p-2" target="_blank" rel="noopener noreferrer" href={`//${profile.social.facebook}`} ><FaFacebook color="#3B5998" bakcground="white" size={32} /></a>
 			        		)}
 			          {isEmpty(profile.social && profile.social.linkedin)?null:(
-									<a className="text-white p-2" target="_blank" href={`//${profile.social.linkedin}`} ><FaLinkedin size={32} color="#0077B5" /></a>
+									<a className="text-white p-2" target="_blank" rel="noopener noreferrer" href={`//${profile.social.linkedin}`} ><FaLinkedin size={32} color="#0077B5" /></a>
 			        	)}
 			          {isEmpty(profile.social && profile.social.instagram)?null:(
-									<a className="text-white p-2" target="_blank" href={`//${profile.social.instagram}`} ><FaInstagram size={32} /></a>
+									<a className="text-white p-2" target="_blank" rel="noopener noreferrer" href={`//${profile.social.instagram}`} ><FaInstagram size={32} /></a>
 			        	)}
 			        	{isEmpty(profile.social && profile.social.youtube)?null:(
-									<a className="text-white p-2" target="_blank" href={`//${profile.social.youtube}`} ><FaYoutube size={32} /></a>
+									<a className="text-white p-2" target="_blank" rel="noopener noreferrer" href={`//${profile.social.youtube}`} ><FaYoutube size={32} /></a>
 			        	)}
 			        </p>
 			      </div>
