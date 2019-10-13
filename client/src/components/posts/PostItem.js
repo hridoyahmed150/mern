@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom'
 import { FaTimes , FaThumbsDown , FaThumbsUp  } from 'react-icons/fa';
+import {deletePosts ,addLike,removeLike} from './../../actions/postAction';
 
 class PostItem extends Component {
 	onDeleteClick=(id)=>{
-		console.log(id);
+		this.props.deletePosts(id);
 	}
 	render() {
 		const {post,auth }=this.props; 
@@ -50,6 +51,9 @@ class PostItem extends Component {
 }
 
 PostItem.propTypes={
+  removeLike:PropTypes.func.isRequired,
+  addLike:PropTypes.func.isRequired,
+  deletePosts:PropTypes.func.isRequired,
 	post:PropTypes.object.isRequired,
 	auth:PropTypes.object.isRequired
 }
@@ -58,4 +62,4 @@ const mapStateToProps=state=>({
 	auth:state.auth
 })
 
-export default connect(mapStateToProps,{})(PostItem);
+export default connect(mapStateToProps,{deletePosts,addLike,removeLike})(PostItem);
