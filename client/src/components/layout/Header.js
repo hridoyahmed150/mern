@@ -38,6 +38,9 @@ class Header extends Component {
 					<NavItem>
 					  <Link to="/dashboard" className='text-white nav-link'>Dashboard</Link>
 					</NavItem>
+					<NavItem>
+					  <Link to="/feed" className='text-white nav-link'>Post Feed</Link>
+					</NavItem>
 				  <NavItem>
 				    <a 
 				    	href='/' 
